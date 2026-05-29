@@ -1,0 +1,233 @@
+/* ══════════════════════════════════════════════════════════════
+   Catalogo.css
+   ══════════════════════════════════════════════════════════════ */
+
+.cat-root {
+  min-height: 100vh;
+  background: #f5f0ff;
+  font-family: 'Jost', sans-serif;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Loading / Error ────────────────────────────────────────── */
+.cat-loading {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  height: 100vh; gap: 16px; color: #9b30d9;
+}
+.cat-spinner {
+  width: 44px; height: 44px;
+  border: 3px solid #e8dff4;
+  border-top-color: #9b30d9;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg) } }
+
+.cat-error {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  height: 100vh; gap: 12px;
+  color: #aaa; text-align: center; padding: 20px;
+}
+.cat-error i { font-size: 52px; color: #d8c8f0; margin-bottom: 8px; }
+
+/* ── Toolbar ─────────────────────────────────────────────────── */
+.cat-toolbar {
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(74,0,128,.07);
+  padding: 14px 24px 12px;
+  position: sticky; top: 0; z-index: 10;
+}
+.cat-toolbar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.cat-search-wrap {
+  position: relative;
+  display: flex; align-items: center;
+}
+.cat-search-icon {
+  position: absolute; left: 14px;
+  color: #c0a0e0; font-size: 14px;
+  pointer-events: none;
+}
+.cat-search {
+  width: 100%;
+  padding: 12px 42px;
+  border: 2px solid #e8dff4;
+  border-radius: 12px;
+  background: #faf8fe;
+  font-size: 14px;
+  font-family: 'Jost', sans-serif;
+  color: #2a1040;
+  transition: border .2s, box-shadow .2s;
+  outline: none;
+}
+.cat-search:focus {
+  border-color: #9b30d9;
+  box-shadow: 0 0 0 3px rgba(155,48,217,.1);
+}
+.cat-search::placeholder { color: #c0a0e0; }
+.cat-search-clear {
+  position: absolute; right: 12px;
+  background: none; border: none;
+  color: #c0a0e0; cursor: pointer;
+  font-size: 13px; padding: 4px;
+  transition: color .2s;
+}
+.cat-search-clear:hover { color: #9b30d9; }
+
+.cat-results {
+  max-width: 1100px; margin: 8px auto 0;
+  font-size: 12px; color: #aaa;
+}
+
+/* ── Main ────────────────────────────────────────────────────── */
+.cat-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 24px;
+  flex: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── Empty ───────────────────────────────────────────────────── */
+.cat-empty {
+  text-align: center; padding: 80px 20px;
+}
+.cat-empty i {
+  font-size: 52px; color: #d8c8f0;
+  display: block; margin-bottom: 16px;
+}
+.cat-empty p { font-size: 16px; color: #aaa; margin-bottom: 20px; }
+.cat-empty-btn {
+  background: linear-gradient(135deg,#4a0080,#9b30d9);
+  color: #fff; border: none; border-radius: 12px;
+  padding: 10px 24px; font-size: 14px; font-weight: 700;
+  cursor: pointer; font-family: 'Jost', sans-serif;
+}
+
+/* ── Grid ────────────────────────────────────────────────────── */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+/* ── Card ────────────────────────────────────────────────────── */
+.cat-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(74,0,128,.07);
+  border: 1px solid rgba(155,48,217,.08);
+  transition: transform .25s cubic-bezier(.4,0,.2,1), box-shadow .25s;
+  display: flex; flex-direction: column;
+}
+.cat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(74,0,128,.15);
+}
+.cat-card.agotado { opacity: .7; }
+.cat-card.agotado:hover { transform: none; box-shadow: 0 2px 14px rgba(74,0,128,.07); }
+
+/* Imagen — ratio fijo */
+.cat-card-img {
+  position: relative;
+  width: 100%; padding-top: 72%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f5f0ff, #ede0f8);
+}
+.cat-card-img img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+.cat-card:hover .cat-card-img img { transform: scale(1.05); }
+.cat-card-no-img {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: #cbb8e8; font-size: 40px;
+}
+
+/* Overlay agotado */
+.cat-agotado-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.45);
+  display: flex; align-items: center; justify-content: center;
+}
+.cat-agotado-overlay span {
+  color: #fff; font-size: 15px; font-weight: 800;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* Info */
+.cat-card-info {
+  padding: 14px 16px 16px;
+  flex: 1; display: flex; flex-direction: column; gap: 7px;
+}
+.cat-card-nombre {
+  font-size: 15px; font-weight: 800; color: #2a1040; line-height: 1.3;
+}
+.cat-card-desc {
+  font-size: 12px; color: #888; line-height: 1.5; flex: 1;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.cat-card-footer {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-top: 6px;
+  gap: 8px;
+}
+.cat-card-precio {
+  font-size: 18px; font-weight: 900; color: #7b1fa2;
+}
+
+/* Estado badge abajo */
+.cat-card-estado {
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 20px;
+  white-space: nowrap;
+}
+.cat-card-estado.disponible {
+  background: #d1fae5; color: #065f46;
+}
+.cat-card-estado.agotado {
+  background: #fee2e2; color: #991b1b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .cat-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
+}
+
+@media (max-width: 768px) {
+  .cat-toolbar { padding: 12px 16px 10px; }
+  .cat-main { padding: 20px 16px; }
+  .cat-grid { grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 14px; }
+  .cat-card-nombre { font-size: 14px; }
+  .cat-card-precio { font-size: 16px; }
+}
+
+@media (max-width: 480px) {
+  .cat-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .cat-card-img { padding-top: 80%; }
+  .cat-card-info { padding: 11px 12px 13px; gap: 5px; }
+  .cat-card-nombre { font-size: 13px; }
+  .cat-card-desc { -webkit-line-clamp: 1; }
+  .cat-card-precio { font-size: 15px; }
+  .cat-card-estado { font-size: 10px; padding: 2px 8px; }
+}
+
+@media (max-width: 340px) {
+  .cat-grid { grid-template-columns: 1fr; }
+}

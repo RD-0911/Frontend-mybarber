@@ -1,0 +1,424 @@
+/* ══════════════════════════════════════════════════════════════
+   Modal.css — componente global reutilizable
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Overlay ─────────────────────────────────────────────────── */
+.m-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 0, 60, 0.52);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: mOverlayIn .18s ease;
+}
+@keyframes mOverlayIn { from { opacity: 0 } to { opacity: 1 } }
+
+/* ── Box ─────────────────────────────────────────────────────── */
+.m-box {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 64px rgba(74, 0, 128, 0.28);
+  animation: mBoxIn .22s cubic-bezier(.4, 0, .2, 1);
+  overflow: hidden;
+}
+@keyframes mBoxIn {
+  from { opacity: 0; transform: scale(.94) translateY(10px) }
+  to   { opacity: 1; transform: scale(1)   translateY(0) }
+}
+
+/* Tamaños */
+.m-box--sm { max-width: 400px; }
+.m-box--md { max-width: 520px; }
+.m-box--lg { max-width: 640px; }
+.m-box--xl { max-width: 780px; }
+
+/* ── Header ─────────────────────────────────────────────────── */
+.m-header {
+  background: linear-gradient(135deg, #4a0080, #9b30d9);
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.m-header--danger {
+  background: linear-gradient(135deg, #7f1d1d, #ef4444);
+}
+
+.m-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.m-header-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.m-title {
+  font-size: 20px;
+  font-weight: 800;
+  /* !important necesario: .main-content h2 en Dashboard.css tiene mayor especificidad */
+  color: #fff !important;
+  font-family: 'Jost', sans-serif !important;
+  margin: 0 !important;
+  line-height: 1.2;
+  word-break: break-word;
+  text-overflow: unset;
+  white-space: normal;
+}
+
+.m-close {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s;
+  flex-shrink: 0;
+}
+.m-close:hover { background: rgba(255, 255, 255, 0.32); }
+
+/* ── Body ────────────────────────────────────────────────────── */
+.m-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ── Footer ──────────────────────────────────────────────────── */
+.m-footer {
+  padding: 16px 24px 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  border-top: 1px solid rgba(155, 48, 217, 0.1);
+  background: #faf8fe;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* ── Botones estándar para usar dentro de m-footer ───────────── */
+.m-btn-cancel {
+  background: transparent;
+  border: 1.5px solid rgba(155, 48, 217, 0.2);
+  border-radius: 10px;
+  color: #7a6090;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .15s;
+}
+.m-btn-cancel:hover {
+  border-color: #9b30d9;
+  color: #4a0080;
+  background: #f5edff;
+}
+
+.m-btn-primary {
+  background: linear-gradient(135deg, #4a0080, #9b30d9);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(74, 0, 128, 0.25);
+  transition: opacity .15s, transform .1s;
+}
+.m-btn-primary:hover:not(:disabled) { opacity: .88; transform: translateY(-1px); }
+.m-btn-primary:active:not(:disabled) { transform: translateY(0); }
+.m-btn-primary:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+
+.m-btn-danger {
+  background: linear-gradient(135deg, #7f1d1d, #ef4444);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3);
+  transition: opacity .15s, transform .1s;
+}
+.m-btn-danger:hover { opacity: .88; transform: translateY(-1px); }
+
+/* ── Helpers de contenido reutilizables ──────────────────────── */
+
+/* Fila de formulario */
+.m-row {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.m-row label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #7a6090;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.m-row label i { color: #9b30d9; font-size: 12px; }
+
+.m-row input,
+.m-row select,
+.m-row textarea {
+  padding: 11px 14px;
+  border: 1.5px solid rgba(155, 48, 217, 0.18);
+  border-radius: 10px;
+  background: #f8f5fe;
+  color: #2a1040;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border .2s, box-shadow .2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+.m-row input:focus,
+.m-row select:focus,
+.m-row textarea:focus {
+  outline: none;
+  border-color: #9b30d9;
+  box-shadow: 0 0 0 3px rgba(155, 48, 217, .1);
+  background: #fff;
+}
+.m-row textarea { resize: vertical; min-height: 90px; }
+
+/* Dos columnas */
+.m-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* Error inline */
+.m-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #dc2626;
+  background: #fff5f5;
+  border: 1px solid rgba(239, 68, 68, .2);
+  border-left: 3px solid #ef4444;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+/* Aviso / info */
+.m-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  background: rgba(155, 48, 217, .06);
+  border: 1px solid rgba(155, 48, 217, .18);
+  color: #4a0080;
+  line-height: 1.5;
+}
+.m-info i { color: #9b30d9; margin-top: 1px; flex-shrink: 0; }
+
+/* Aviso de advertencia */
+.m-warn {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  background: #fffbeb;
+  border: 1px solid rgba(245, 158, 11, .3);
+  color: #92400e;
+  line-height: 1.5;
+}
+.m-warn i { color: #f59e0b; margin-top: 1px; flex-shrink: 0; }
+
+/* Aviso de peligro */
+.m-danger-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  background: #fff5f5;
+  border: 1px solid rgba(239, 68, 68, .2);
+  color: #7f1d1d;
+  line-height: 1.5;
+}
+.m-danger-note i { color: #ef4444; margin-top: 1px; flex-shrink: 0; }
+
+/* Texto de confirmación grande */
+.m-confirm-text {
+  font-size: 16px;
+  color: #2a1040;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.m-confirm-text strong { color: #4a0080; }
+
+/* Label hint */
+.m-hint {
+  font-size: 11px;
+  color: #aaa;
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+/* Grid de datos (detalle de cita) */
+.m-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.m-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 11px 14px;
+  background: #f8f5fe;
+  border-radius: 10px;
+  border: 1px solid rgba(155, 48, 217, .1);
+}
+.m-detail-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #9b30d9;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.m-detail-val {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2a1040;
+  word-break: break-word;
+}
+/* Item que ocupa las 2 columnas */
+.m-detail-item.full { grid-column: 1 / -1; }
+
+/* Sección de acciones (cambiar estado) */
+.m-actions-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.m-actions-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #7a6090;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.m-actions-btns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.m-estado-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1.5px solid var(--ec, rgba(155,48,217,.3));
+  background: none;
+  color: var(--ec, #7a6090);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .15s;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.m-estado-btn:hover,
+.m-estado-btn.activo {
+  background: var(--ec, #9b30d9);
+  color: #fff;
+  border-color: var(--ec, #9b30d9);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .m-overlay { padding: 16px; align-items: flex-end; }
+  .m-box {
+    max-width: 100% !important;
+    border-radius: 20px 20px 16px 16px;
+    max-height: 88vh;
+  }
+  .m-header { padding: 18px 20px; }
+  .m-header-icon { width: 38px; height: 38px; font-size: 17px; border-radius: 10px; }
+  .m-title { font-size: 18px; }
+  .m-body { padding: 20px; gap: 16px; }
+  .m-footer { padding: 14px 20px 18px; }
+  .m-row-2 { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .m-overlay { padding: 10px; align-items: flex-end; }
+  .m-box { border-radius: 18px 18px 12px 12px; max-height: 92vh; }
+  .m-header { padding: 16px 18px; gap: 10px; }
+  .m-header-icon { width: 34px; height: 34px; font-size: 15px; }
+  .m-title { font-size: 17px; }
+  .m-body { padding: 16px 18px; gap: 14px; }
+  .m-footer {
+    padding: 12px 18px 16px;
+    flex-direction: column-reverse;
+  }
+  .m-btn-cancel,
+  .m-btn-primary,
+  .m-btn-danger {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+  }
+  .m-row-2 { grid-template-columns: 1fr; }
+  .m-detail-grid { grid-template-columns: 1fr; }
+  .m-actions-btns { gap: 6px; }
+  .m-estado-btn { font-size: 12px; padding: 7px 12px; }
+}

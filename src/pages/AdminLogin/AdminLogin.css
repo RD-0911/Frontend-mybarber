@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700;800&display=swap');
+
+/* ── Canvas de partículas ──────────────────────────────────────── */
+.al-particle-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  background: linear-gradient(to right, #ece9e6, #ffffff);
+}
+
+/* ── Root — encima del canvas ──────────────────────────────────── */
+.al-root {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Jost', sans-serif;
+  z-index: 1;
+  padding: 16px;
+}
+
+/* ── Card ──────────────────────────────────────────────────────── */
+.al-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 36px 32px 28px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow:
+    0 8px 40px rgba(74, 0, 128, .12),
+    0 2px 8px  rgba(74, 0, 128, .06);
+  border: 1px solid rgba(155, 48, 217, .12);
+}
+
+/* ── Header ────────────────────────────────────────────────────── */
+.al-header { text-align: center; margin-bottom: 28px; }
+
+.al-logo {
+  width: 100px; height: 100px;
+  margin: 0 auto 16px;
+}
+.al-logo-img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+}
+
+.al-title {
+  font-size: 26px; font-weight: 800;
+  color: #2a1040; margin: 0 0 4px;
+}
+
+.al-sub {
+  font-size: 13px; color: #9b30d9;
+  font-weight: 600; margin: 0;
+}
+
+/* ── Form ──────────────────────────────────────────────────────── */
+.al-form { display: flex; flex-direction: column; gap: 16px; }
+
+.al-field { display: flex; flex-direction: column; gap: 6px; }
+
+.al-field label {
+  font-size: 13px; font-weight: 600;
+  color: #7a6090;
+  display: flex; align-items: center; gap: 6px;
+}
+.al-field label i { color: #9b30d9; font-size: 12px; }
+
+.al-field input {
+  width: 100%; box-sizing: border-box;
+  padding: 11px 14px;
+  border: 1.5px solid rgba(155, 48, 217, .2);
+  border-radius: 10px;
+  background: rgba(248, 245, 254, 0.9);
+  color: #2a1040;
+  font-size: 14px;
+  font-family: 'Jost', sans-serif;
+  transition: border-color .2s, box-shadow .2s;
+}
+.al-field input:focus {
+  outline: none;
+  border-color: #9b30d9;
+  box-shadow: 0 0 0 3px rgba(155, 48, 217, .1);
+  background: #fff;
+}
+
+/* ── Password wrap ─────────────────────────────────────────────── */
+.al-pass-wrap { position: relative; }
+.al-pass-wrap input { padding-right: 44px; }
+
+.al-eye {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  background: none; border: none;
+  color: #9b30d9; cursor: pointer; font-size: 14px; padding: 4px;
+  line-height: 1;
+}
+.al-eye:hover { color: #4a0080; }
+
+/* ── Error ─────────────────────────────────────────────────────── */
+.al-error {
+  display: flex; align-items: center; gap: 8px;
+  background: #fff1f2;
+  border: 1px solid rgba(239, 68, 68, .2);
+  border-left: 3px solid #ef4444;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px; color: #b91c1c;
+  font-weight: 600;
+}
+.al-error i { font-size: 13px; flex-shrink: 0; }
+
+/* ── Botón ─────────────────────────────────────────────────────── */
+.al-btn {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, #4a0080, #9b30d9);
+  border: none; border-radius: 10px;
+  color: #fff; font-size: 15px; font-weight: 700;
+  font-family: 'Jost', sans-serif;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: 0 4px 16px rgba(74, 0, 128, .28);
+  transition: opacity .15s, transform .1s;
+  margin-top: 4px;
+}
+.al-btn:hover:not(:disabled) { opacity: .9; transform: translateY(-1px); }
+.al-btn:active:not(:disabled) { transform: translateY(0); }
+.al-btn:disabled { opacity: .65; cursor: not-allowed; }
+
+/* ── Hint ──────────────────────────────────────────────────────── */
+.al-hint {
+  text-align: center;
+  font-size: 12px; color: #b0a0c0;
+  margin: 18px 0 0;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.al-hint i { color: #c060ff; }
+
+/* ── Responsive ────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .al-card { padding: 28px 20px 22px; border-radius: 16px; }
+  .al-title { font-size: 22px; }
+}
+/* ── OTP / Código ────────────────────────────────────── */
+.al-otp-info {
+  text-align: center;
+  padding: 16px;
+  background: rgba(122, 0, 255, 0.08);
+  border: 1px solid rgba(122, 0, 255, 0.25);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.al-otp-info p {
+  color: #ccc;
+  font-size: 14px;
+  margin: 8px 0 4px;
+}
+.al-otp-info strong { color: #c060ff; }
+.al-otp-icon {
+  font-size: 28px;
+  color: #c060ff;
+}
+.al-otp-exp {
+  font-size: 12px;
+  color: #888;
+}
+.al-otp-input {
+  text-align: center !important;
+  font-size: 28px !important;
+  font-family: monospace !important;
+  letter-spacing: 10px !important;
+  font-weight: 700 !important;
+}
+.al-success {
+  background: rgba(0, 200, 100, 0.1);
+  border: 1px solid rgba(0, 200, 100, 0.3);
+  color: #4cff9a;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.al-resend-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  gap: 8px;
+}
+.al-resend-btn, .al-back-btn {
+  background: none;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+  padding: 4px 0;
+}
+.al-resend-btn { color: #c060ff; }
+.al-resend-btn:hover:not(:disabled) { color: #d080ff; }
+.al-resend-btn:disabled { color: #555; cursor: default; }
+.al-back-btn { color: #666; }
+.al-back-btn:hover { color: #999; }
+
+/* ── Indicador de pasos ──────────────────────────────── */
+.al-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 24px;
+}
+.al-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.4;
+  transition: opacity 0.3s;
+}
+.al-step.active, .al-step.done { opacity: 1; }
+.al-step-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(122,0,255,0.15);
+  border: 2px solid #7b00ff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: #c060ff;
+  transition: background 0.3s;
+}
+.al-step.done .al-step-num {
+  background: #7b00ff;
+  color: #fff;
+}
+.al-step.active .al-step-num {
+  background: rgba(122,0,255,0.3);
+  box-shadow: 0 0 12px rgba(122,0,255,0.5);
+}
+.al-step span { font-size: 11px; color: #888; }
+.al-step.active span { color: #c060ff; }
+.al-step-line {
+  flex: 1; max-width: 48px; height: 2px;
+  background: linear-gradient(90deg, #7b00ff, #2a0050);
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+/* ── OTP ─────────────────────────────────────────────── */
+.al-otp-info {
+  text-align: center;
+  padding: 16px;
+  background: rgba(122,0,255,0.08);
+  border: 1px solid rgba(122,0,255,0.25);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.al-otp-info p { color: #ccc; font-size: 14px; margin: 8px 0 4px; }
+.al-otp-info strong { color: #c060ff; }
+.al-otp-icon { font-size: 28px; color: #c060ff; }
+.al-otp-exp { font-size: 12px; color: #888; }
+.al-otp-input {
+  text-align: center !important;
+  font-size: 28px !important;
+  font-family: monospace !important;
+  letter-spacing: 10px !important;
+  font-weight: 700 !important;
+}
+.al-success {
+  background: rgba(0,200,100,0.1);
+  border: 1px solid rgba(0,200,100,0.3);
+  color: #4cff9a;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.al-resend-row {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-top: 12px; gap: 8px;
+}
+.al-resend-btn, .al-back-btn {
+  background: none; border: none; font-size: 13px;
+  cursor: pointer; display: flex; align-items: center;
+  gap: 6px; transition: color 0.2s; padding: 4px 0;
+}
+.al-resend-btn { color: #c060ff; }
+.al-resend-btn:hover:not(:disabled) { color: #d080ff; }
+.al-resend-btn:disabled { color: #555; cursor: default; }
+.al-back-btn { color: #666; }
+.al-back-btn:hover { color: #999; }

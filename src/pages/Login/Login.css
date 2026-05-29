@@ -1,0 +1,994 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Jost:wght@300;400;500;600&display=swap');
+
+/* ── Variables ──────────────────────────────────────────────────── */
+:root {
+  --lb-purple:           #9b30d9;
+  --lb-purple-dark:      #4a0080;
+  --lb-purple-light:     #c060ff;
+  --lb-dark:             #333;
+  --lb-text-dark:        #333;
+  --lb-primary-gradient: linear-gradient(to right, #4a0080 0%, #9b30d9 100%);
+  --lb-error-color:      #e53935;
+  --lb-success-color:    #2e7d32;
+}
+
+/* ── Wrapper centrador ──────────────────────────────────────────── */
+.login-page-wrapper {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* ── Canvas de partículas ───────────────────────────────────────── */
+.lb-particle-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1;
+  background: linear-gradient(to right, #ece9e6, #ffffff);
+}
+
+/* ── Iconos flotantes ───────────────────────────────────────────── */
+.lb-bg-deco {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.lb-deco-icon {
+  position: absolute;
+  color: rgba(37, 117, 252, 0.06);
+  animation: lbFloatDeco 18s ease-in-out infinite;
+}
+@keyframes lbFloatDeco {
+  0%, 100% { transform: translateY(0) rotate(0deg);      opacity: 0.6; }
+  50%       { transform: translateY(-30px) rotate(15deg); opacity: 1;   }
+}
+
+/* ── Contenedor principal ───────────────────────────────────────── */
+.auth-container {
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  width: 900px;
+  max-width: 95vw;
+  min-height: 620px;
+  z-index: 10;
+}
+
+/* ── Paneles de formulario ──────────────────────────────────────── */
+.auth-container .form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+.auth-container .sign-in-container {
+  left: 0; width: 50%; z-index: 2;
+}
+.auth-container.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+}
+
+.auth-container .sign-up-container {
+  left: 0; width: 50%; opacity: 0; z-index: 1;
+}
+.auth-container.right-panel-active .sign-up-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: lbShowPanel 0.6s;
+}
+@keyframes lbShowPanel {
+  0%,  49.99% { opacity: 0; z-index: 1; }
+  50%, 100%   { opacity: 1; z-index: 5; }
+}
+
+/* ── Formularios ────────────────────────────────────────────────── */
+.auth-container form {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 28px 38px;
+  height: 100%;
+  text-align: center;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* ── Brand mini ─────────────────────────────────────────────────── */
+.auth-container .brand-mini {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.auth-container .brand-mini-icon {
+  color: var(--lb-purple);
+  font-size: 18px;
+  transform: rotate(-45deg);
+}
+.auth-container .brand-mini-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--lb-text-dark);
+  letter-spacing: 1px;
+}
+
+/* ── Tipografía (scoped) ────────────────────────────────────────── */
+.auth-container h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 22px;
+  margin: 0 0 4px 0;
+  color: var(--lb-text-dark);
+}
+.auth-container h1.white-text { color: #fff; }
+.auth-container .brand-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 34px;
+  letter-spacing: 2px;
+  margin: 6px 0 2px 0;
+  color: #fff;
+}
+.auth-container p {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  margin: 12px 0 20px;
+  color: rgba(255, 255, 255, 0.85);
+}
+.auth-container .form-subtext {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+  font-family: 'Jost', sans-serif;
+}
+.auth-container .lb-link {
+  color: var(--lb-dark);
+  font-size: 13px;
+  text-decoration: none;
+  margin: 10px 0;
+  transition: color 0.3s;
+  font-weight: 500;
+  font-family: 'Jost', sans-serif;
+}
+.auth-container .lb-link:hover { color: var(--lb-purple); }
+
+/* ── Mensajes de respuesta ──────────────────────────────────────── */
+.auth-container .form-msg {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: left;
+  margin: 6px 0;
+  animation: lbFadeIn 0.3s ease;
+  font-family: 'Jost', sans-serif;
+  box-sizing: border-box;
+}
+.auth-container .form-msg.error {
+  background: #ffebee;
+  color: var(--lb-error-color);
+  border-left: 3px solid var(--lb-error-color);
+}
+.auth-container .form-msg.exito {
+  background: #e8f5e9;
+  color: var(--lb-success-color);
+  border-left: 3px solid var(--lb-success-color);
+}
+@keyframes lbFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Inputs ─────────────────────────────────────────────────────── */
+.auth-container .input-group {
+  position: relative;
+  width: 100%;
+  margin: 4px 0;
+}
+.auth-container .input-icon {
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  color: #bbb;
+  font-size: 12px;
+  pointer-events: none;
+  transition: color 0.3s;
+}
+.auth-container .input-group:focus-within .input-icon {
+  color: var(--lb-purple-dark);
+}
+
+.auth-container input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1.5px solid #ddd;
+  padding: 10px 12px 10px 32px;
+  width: 100%;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  color: var(--lb-text-dark);
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+.auth-container input:focus          { outline: none; border-bottom-color: var(--lb-purple-dark); }
+.auth-container input::placeholder   { color: #aaa; }
+.auth-container input.input-error    { border-bottom-color: var(--lb-error-color); }
+
+/* Error por campo */
+.auth-container .field-error {
+  display: block;
+  color: var(--lb-error-color);
+  font-size: 10px;
+  text-align: left;
+  margin: 1px 0 2px 32px;
+  animation: lbFadeIn 0.2s ease;
+  font-family: 'Jost', sans-serif;
+}
+
+/* ── Botones ────────────────────────────────────────────────────── */
+.auth-container button {
+  border-radius: 50px;
+  border: none;
+  background: var(--lb-primary-gradient);
+  color: #fff;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in, box-shadow 0.3s, opacity 0.3s;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.auth-container button:hover:not(:disabled) {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+.auth-container button:active:not(:disabled) { transform: scale(0.95); }
+.auth-container button:focus   { outline: none; }
+.auth-container button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.auth-container button.ghost {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  box-shadow: none;
+}
+.auth-container button.ghost:hover { background: rgba(255, 255, 255, 0.1); }
+
+/* ── Overlay ────────────────────────────────────────────────────── */
+.auth-container .overlay-container {
+  position: absolute;
+  top: 0; left: 50%;
+  width: 50%; height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+.auth-container.right-panel-active .overlay-container { transform: translateX(-100%); }
+
+.auth-container .overlay {
+  background: var(--lb-primary-gradient);
+  position: relative;
+  left: -100%;
+  height: 100%; width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+.auth-container.right-panel-active .overlay { transform: translateX(50%); }
+
+.auth-container .overlay-panel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  top: 0;
+  height: 100%; width: 50%;
+  transition: transform 0.6s ease-in-out;
+}
+.auth-container .overlay-left  { transform: translateX(-20%); }
+.auth-container.right-panel-active .overlay-left  { transform: translateX(0); }
+.auth-container .overlay-right { right: 0; transform: translateX(0); }
+.auth-container.right-panel-active .overlay-right { transform: translateX(20%); }
+
+.auth-container .overlay-logo {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.auth-container .logo-icon {
+  width: 110px;        /* tamaño del logo */
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* vuelve el logo blanco */
+}
+.auth-container .overlay-divider {
+  color: rgba(255, 255, 255, 0.6);
+  margin: 4px 0 16px;
+  font-size: 14px;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Estilos del modal de recuperación de contraseña
+══════════════════════════════════════════════════════════════════ */
+
+/* ── Backdrop ───────────────────────────────────────────────────── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 0, 30, 0.60);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeInBackdrop 0.25s ease;
+}
+@keyframes fadeInBackdrop {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Card ───────────────────────────────────────────────────────── */
+.modal-card {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 420px;
+  max-width: 95vw;
+  padding: 28px 32px 32px;
+  box-shadow: 0 24px 64px rgba(74, 0, 128, 0.30);
+  animation: slideUp 0.30s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(28px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+
+/* ── Header ─────────────────────────────────────────────────────── */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.modal-brand {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.modal-brand-icon {
+  color: #9b30d9;
+  font-size: 16px;
+  transform: rotate(-45deg);
+}
+.modal-brand-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 900;
+  color: #4a0080;
+  letter-spacing: 1px;
+}
+.modal-close {
+  background: #f4f0fa;
+  border: none;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #666;
+  font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.modal-close:hover { background: #ede0f7; color: #4a0080; }
+
+/* ── Indicador de pasos ─────────────────────────────────────────── */
+.modal-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 22px;
+}
+.step-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+.step-dot {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: #f0e8fa;
+  color: #bbb;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.3s, color 0.3s;
+  z-index: 1;
+  flex-shrink: 0;
+}
+.step-dot.active {
+  background: linear-gradient(135deg, #4a0080, #9b30d9);
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(155, 48, 217, 0.18);
+}
+.step-dot.done {
+  background: #9b30d9;
+  color: #fff;
+}
+.step-label {
+  font-size: 10px;
+  color: #bbb;
+  font-weight: 500;
+  margin: 0 4px;
+  white-space: nowrap;
+}
+.step-label.active { color: #4a0080; font-weight: 700; }
+.step-line {
+  width: 28px; height: 2px;
+  background: #e8d8f8;
+  transition: background 0.3s;
+  flex-shrink: 0;
+}
+.step-line.done { background: #9b30d9; }
+
+/* ── Formulario dentro del modal ────────────────────────────────── */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeStep 0.25s ease;
+}
+@keyframes fadeStep {
+  from { opacity: 0; transform: translateX(10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.modal-icon-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+.modal-step-icon {
+  font-size: 36px;
+  background: linear-gradient(135deg, #4a0080, #9b30d9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #2d2d2d;
+  text-align: center;
+  margin: 0;
+}
+.modal-desc {
+  font-size: 13px;
+  color: #888;
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+}
+.modal-desc strong { color: #4a0080; }
+
+/* ── Botón principal del modal ──────────────────────────────────── */
+.modal-btn {
+  border-radius: 50px;
+  border: none;
+  background: linear-gradient(to right, #4a0080, #9b30d9);
+  color: #fff;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 13px 28px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.15s, opacity 0.2s;
+  box-shadow: 0 4px 14px rgba(74, 0, 128, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.modal-btn:hover:not(:disabled) {
+  box-shadow: 0 6px 20px rgba(74, 0, 128, 0.40);
+  transform: translateY(-1px);
+}
+.modal-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Links y botones de texto ───────────────────────────────────── */
+.modal-link {
+  background: transparent;
+  border: none;
+  color: #9b30d9;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  padding: 4px 0;
+  transition: color 0.2s;
+}
+.modal-link:hover        { color: #4a0080; }
+.modal-link.secondary    { color: #aaa; font-weight: 500; font-size: 12px; }
+.modal-link.secondary:hover { color: #666; }
+.modal-link:disabled     { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Cajas del código de 6 dígitos ──────────────────────────────── */
+.codigo-boxes {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 6px 0;
+}
+.codigo-box {
+  width: 46px !important;
+  height: 54px;
+  border: 2px solid #e0d0f0;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #4a0080;
+  font-family: 'Jost', sans-serif;
+  background: #faf7ff;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  padding: 0;
+  outline: none;
+}
+.codigo-box:focus {
+  border-color: #9b30d9;
+  box-shadow: 0 0 0 3px rgba(155, 48, 217, 0.15);
+  transform: scale(1.06);
+  background: #fff;
+}
+
+/* ── Reenviar código ────────────────────────────────────────────── */
+.reenviar-wrap {
+  text-align: center;
+  min-height: 24px;
+}
+.reenviar-cuenta {
+  font-size: 12px;
+  color: #aaa;
+}
+.reenviar-cuenta strong { color: #4a0080; }
+
+/* ── Medidor de fuerza de contraseña ────────────────────────────── */
+.pass-strength {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pass-bars {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+.pass-bar {
+  height: 4px;
+  flex: 1;
+  border-radius: 4px;
+  background: #e0e0e0;
+  transition: background 0.3s;
+}
+.pass-label {
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 60px;
+  text-align: right;
+}
+
+/* ── El link "¿Olvidaste tu contraseña?" ahora es un button ──────── */
+.lb-link {
+  background: transparent;
+  border: none;
+  color: #333;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  margin: 10px 0;
+  transition: color 0.2s;
+  text-align: center;
+}
+.lb-link:hover { color: #9b30d9; }
+
+/* Quita el estilo de botón del link de olvidaste contraseña */
+button.lb-link {
+  all: unset;
+  color: #333;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 10px 0;
+  display: block;
+  text-align: center;
+  transition: color 0.2s;
+}
+button.lb-link:hover {
+  color: #9b30d9;
+}
+/* ── Toggle mostrar/ocultar contraseña ──────────────────────────── */
+.auth-container .toggle-pass {
+  all: unset;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-60%);
+  color: #bbb;
+  font-size: 13px;
+  cursor: pointer;
+  transition: color 0.2s;
+  line-height: 1;
+}
+.auth-container .toggle-pass:hover { color: #9b30d9; }
+
+/* Modal también necesita el toggle */
+.modal-card .input-group { position: relative; }
+.modal-card .toggle-pass {
+  all: unset;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-60%);
+  color: #bbb;
+  font-size: 13px;
+  cursor: pointer;
+  transition: color 0.2s;
+  line-height: 1;
+}
+.modal-card .toggle-pass:hover { color: #9b30d9; }
+
+/* Ajuste padding del input para que no tape el ojito */
+.auth-container input[type="password"],
+.auth-container input[type="text"].pass-visible {
+  padding-right: 36px;
+}
+/* Ocultar mobile-switch en desktop */
+.auth-container .mobile-switch { display: none; }
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE — Login / Registro
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Tablet (≤768px) ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .login-page-wrapper {
+    padding: 16px;
+    align-items: flex-start;
+    min-height: 100dvh;
+  }
+
+  .auth-container {
+    width: 100%;
+    max-width: 480px;
+    min-height: unset;
+    border-radius: 20px;
+    margin: 0 auto;
+  }
+
+  /* Ocultar el panel overlay (decorativo) en tablet/móvil */
+  .overlay-container { display: none !important; }
+
+  /* Formularios ocupan todo el ancho */
+  .auth-container .form-container {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    z-index: 1 !important;
+  }
+
+  /* Mostrar solo el panel activo */
+  .auth-container .sign-in-container  { display: block; }
+  .auth-container .sign-up-container  { display: none; }
+  .auth-container.right-panel-active .sign-in-container  { display: none; }
+  .auth-container.right-panel-active .sign-up-container  { display: block; }
+
+  .auth-container form {
+    padding: 32px 28px 28px;
+    min-height: unset;
+    justify-content: flex-start;
+    gap: 4px;
+  }
+
+  .auth-container h1 { font-size: 22px; margin-bottom: 4px; }
+  .auth-container .form-subtext { margin-bottom: 14px; }
+
+  /* Botón de cambio de panel — mostrar en lugar del overlay */
+  .auth-container .mobile-switch {
+    display: flex !important;
+    justify-content: center;
+    padding: 0 0 20px;
+    gap: 6px;
+    font-size: 13px;
+    color: #888;
+    font-family: 'Jost', sans-serif;
+  }
+  .auth-container .mobile-switch button {
+    all: unset;
+    color: #9b30d9;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Jost', sans-serif;
+  }
+  .auth-container .mobile-switch button:hover { text-decoration: underline; }
+}
+
+/* ── Móvil (≤480px) ──────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .login-page-wrapper { padding: 12px; }
+
+  .auth-container { border-radius: 16px; }
+
+  .auth-container form { padding: 28px 20px 24px; gap: 2px; }
+
+  .auth-container h1 { font-size: 20px; }
+
+  .auth-container input {
+    font-size: 16px; /* evita zoom en iOS */
+    padding: 12px 12px 12px 32px;
+  }
+
+  .auth-container button[type="submit"] {
+    padding: 12px 36px;
+    font-size: 12px;
+    width: 100%;
+  }
+
+  .input-group { margin: 3px 0; }
+}
+
+/* ── Muy pequeño (≤360px) ────────────────────────────────────── */
+@media (max-width: 360px) {
+  .auth-container form { padding: 24px 16px 20px; }
+  .auth-container h1 { font-size: 18px; }
+}
+
+/* ── Hint de carga servidor ──────────────────────────────────── */
+.login-server-hint {
+  font-size: 11px;
+  color: #9b30d9;
+  text-align: center;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-family: 'Jost', sans-serif;
+}
+.login-server-hint i { color: #c060ff; }
+
+.login-cargando {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+.login-barra {
+  width: 100%;
+  height: 3px;
+  background: #ede0f8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.login-barra-fill {
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, #9b30d9, #c060ff);
+  border-radius: 4px;
+  animation: barraSlide 1.2s ease-in-out infinite;
+}
+@keyframes barraSlide {
+  0%   { transform: translateX(-150%) }
+  100% { transform: translateX(350%)  }
+}
+.login-hint-text {
+  font-size: 11px;
+  color: #9b30d9;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Jost', sans-serif;
+}
+
+
+/* Botón Google arriba del form */
+.google-btn-wrap {
+  width: 100%;
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+}
+.google-btn-wrap > div {
+  width: 100% !important;
+}
+.google-btn-loading {
+  background: #fff;
+  border: 1.5px solid rgba(0,0,0,.1);
+  border-radius: 40px;
+  padding: 10px 20px;
+  width: 100%;
+  text-align: center;
+  color: #9b30d9;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Jost', sans-serif;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+
+/* Divisor entre Google y el form */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 18px 0 4px;
+  width: 100%;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(155,48,217,.2);
+}
+.auth-divider span {
+  font-size: 11px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+/* ══════════════════════════════════════════════════════════════
+   BOTÓN GOOGLE CIRCULAR MORADO 
+   ══════════════════════════════════════════════════════════════ */
+
+.social-btns {
+  display: flex !important;
+  justify-content: center !important;
+  margin-top: 16px !important;
+  margin-bottom: 6px !important;
+}
+
+/* Wrapper con position relative para que el botón real se pueda poner encima */
+.google-btn-wrap {
+  position: relative !important;
+  width: 48px !important;
+  height: 48px !important;
+  display: inline-block !important;
+}
+
+/* Círculo morado visual */
+.google-btn-fake {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #4a0080, #9b30d9) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #fff !important;
+  font-size: 18px !important;
+  box-shadow: 0 4px 12px rgba(74,0,128,.3) !important;
+  transition: transform .15s, box-shadow .15s !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+.google-btn-wrap:hover .google-btn-fake {
+  transform: scale(1.08) !important;
+  box-shadow: 0 6px 16px rgba(155,48,217,.4) !important;
+}
+.google-btn-wrap:active .google-btn-fake {
+  transform: scale(.96) !important;
+}
+
+/* Botón real de Google — invisible pero clickeable encima */
+.google-btn-real {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 48px !important;
+  height: 48px !important;
+  opacity: 0 !important;
+  z-index: 2 !important;
+  cursor: pointer !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+}
+.google-btn-real > div {
+  width: 48px !important;
+  height: 48px !important;
+}
+.google-btn-real iframe {
+  width: 48px !important;
+  height: 48px !important;
+}
+
+/* Estado loading */
+.social-btn.google.loading {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #4a0080, #9b30d9) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  border: none !important;
+}
+
+/* Texto bajo el botón */
+.social-tagline {
+  text-align: center !important;
+  font-size: 12px !important;
+  color: #7a6090 !important;
+  margin: 10px 0 4px !important;
+  font-weight: 500 !important;
+}
+
+/* Divisor */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 4px;
+  width: 100%;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(155,48,217,.2);
+}
+.auth-divider span {
+  font-size: 11px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-weight: 600;
+  white-space: nowrap;
+}

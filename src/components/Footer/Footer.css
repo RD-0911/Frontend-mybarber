@@ -1,0 +1,15 @@
+/* ── Footer ──────────────────────────────────────────────────── */
+.footer {
+  background: #f9f5ff;
+  border-top: 1px solid #e8d8f8;
+  padding: 20px;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer p {
+  font-size: 12px;
+  color: #999;
+  margin: 0;
+  font-family: 'Jost', sans-serif;
+}

@@ -1,0 +1,375 @@
+/* ── Navbar ──────────────────────────────────────────────────── */
+.navbar {
+  height: 64px;
+  padding: 0 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #4a0080, #9b30d9);
+  color: white;
+  box-shadow: 0 2px 20px rgba(74,0,128,0.3);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+/* Brand */
+.navbar-left { display: flex; align-items: center; gap: 32px; }
+.brand {
+  font-size: 20px; font-weight: 900;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 1px; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  transition: opacity .2s;
+}
+.brand:hover { opacity: .85; }
+.brand-icon { font-size: 18px; transform: rotate(-45deg); }
+
+/* Nav links */
+.nav-links { display: flex; gap: 6px; }
+.nav-btn {
+  background: transparent; border: none;
+  color: rgba(255,255,255,.85); font-size: 14px; font-weight: 500;
+  cursor: pointer; padding: 8px 0; border-radius: 20px;
+  transition: background .2s, color .2s; font-family: 'Jost', sans-serif;
+  display: flex; align-items: center; justify-content: center;
+  width: 110px; overflow: hidden; position: relative;
+}
+.nav-btn:hover { background: rgba(255,255,255,.15); color: #fff; }
+.nav-btn.active { background: rgba(255,255,255,.25); color: #fff; font-weight: 700; }
+
+.nav-btn-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  max-width: 0; opacity: 0; overflow: hidden;
+  transition: max-width .25s ease, opacity .2s ease;
+  font-size: 14px; width: 14px; height: 14px;
+}
+.nav-btn-icon i { font-size:14px; width:14px; height:14px; display:flex; align-items:center; justify-content:center; }
+.nav-btn-icon.visible { max-width: 20px; opacity: 1; }
+.nav-btn-label { display:inline-block; max-width:120px; opacity:1; overflow:hidden; transition: max-width .25s ease, opacity .2s ease; }
+.nav-btn-label.hidden { max-width: 0; opacity: 0; }
+
+/* ── Botón de cuenta (lado derecho) ─────────────────────────── */
+.navbar-right { display: flex; align-items: center; }
+
+.cuenta-btn {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+  border-radius: 40px; padding: 5px 14px 5px 5px;
+  cursor: pointer; transition: background .2s, transform .15s;
+  color: #fff;
+}
+.cuenta-btn:hover { background: rgba(255,255,255,.22); transform: translateY(-1px); }
+
+.cuenta-info { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+.cuenta-nombre  { font-size: 13px; font-weight: 700; color: #fff; }
+.cuenta-negocio { font-size: 11px; color: rgba(255,255,255,.7); }
+.cuenta-chevron { font-size: 11px; color: rgba(255,255,255,.7); margin-left: 2px; }
+
+/* ── Avatar ──────────────────────────────────────────────────── */
+.avatar {
+  border-radius: 50%; overflow: hidden; flex-shrink: 0;
+  background: linear-gradient(135deg, #c060ff, #4a0080);
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid rgba(255,255,255,.4);
+}
+.avatar-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Ocultar el texto alt cuando la imagen falla */
+  color: transparent;
+  font-size: 0;
+}
+.avatar-iniciales { font-size: 13px; font-weight: 800; color: #fff; letter-spacing: .5px; }
+
+/* ── Backdrop ─────────────────────────────────────────────────── */
+.panel-backdrop {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(20,0,40,.45);
+  backdrop-filter: blur(2px);
+  animation: fadeIn .2s ease;
+}
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+
+/* ── Panel de cuenta ─────────────────────────────────────────── */
+.panel-cuenta {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: 360px; max-width: 95vw;
+  background: #fff; z-index: 400;
+  display: flex; flex-direction: column;
+  box-shadow: -8px 0 40px rgba(74,0,128,.2);
+  animation: slidePanel .25s cubic-bezier(.4,0,.2,1);
+  font-family: 'Jost', sans-serif;
+}
+@keyframes slidePanel { from { transform: translateX(100%) } to { transform: none } }
+
+/* Panel header */
+.panel-header {
+  background: linear-gradient(160deg, #4a0080, #9b30d9);
+  color: #fff; padding: 20px 20px 0;
+}
+
+.panel-header-top {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
+}
+.panel-titulo { font-size: 16px; font-weight: 800; letter-spacing: .3px; }
+.panel-close {
+  width: 32px; height: 32px; border: none; border-radius: 8px;
+  background: rgba(255,255,255,.15); color: #fff; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+  transition: background .15s;
+}
+.panel-close:hover { background: rgba(255,255,255,.3); }
+
+/* Sección de perfil */
+.panel-perfil {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 20px; position: relative;
+}
+
+.panel-avatar-wrap { position: relative; flex-shrink: 0; }
+.panel-avatar-wrap .avatar { border: 3px solid rgba(255,255,255,.5); }
+
+.avatar-edit-btn {
+  position: absolute; bottom: -2px; right: -2px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: #fff; color: #4a0080; border: none;
+  font-size: 11px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,.2); transition: transform .15s;
+}
+.avatar-edit-btn:hover { transform: scale(1.15); }
+
+.panel-perfil-info { flex: 1; min-width: 0; }
+.pp-nombre  { display: block; font-size: 15px; font-weight: 800; color: #fff; }
+.pp-negocio { display: block; font-size: 12px; color: rgba(255,255,255,.75); margin-top: 2px; }
+.pp-correo  { display: block; font-size: 11px; color: rgba(255,255,255,.6); margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.btn-quitar-foto {
+  background: rgba(255,255,255,.15); border: none; color: rgba(255,255,255,.7);
+  width: 28px; height: 28px; border-radius: 8px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 12px;
+  flex-shrink: 0; transition: background .15s;
+}
+.btn-quitar-foto:hover { background: rgba(239,68,68,.4); color: #fff; }
+
+/* Tabs */
+.panel-tabs {
+  display: flex; gap: 2px;
+  background: rgba(0,0,0,.15); border-radius: 10px 10px 0 0;
+  padding: 4px 4px 0;
+}
+.ptab {
+  flex: 1; background: transparent; border: none; color: rgba(255,255,255,.65);
+  font-size: 13px; font-weight: 600; padding: 9px 8px;
+  border-radius: 8px 8px 0 0; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  font-family: 'Jost', sans-serif; transition: background .15s, color .15s;
+}
+.ptab i { font-size: 12px; }
+.ptab.active { background: #fff; color: #4a0080; }
+.ptab:not(.active):hover { background: rgba(255,255,255,.15); color: #fff; }
+
+/* Mensaje flash */
+.panel-msg {
+  margin: 12px 16px 0;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 13px; font-weight: 600;
+  display: flex; align-items: center; gap: 8px;
+  animation: fadeIn .2s ease;
+}
+.panel-msg.ok    { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+.panel-msg.error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+/* Body del panel */
+.panel-body { flex: 1; overflow-y: auto; padding: 16px; }
+
+.panel-form { display: flex; flex-direction: column; gap: 14px; }
+
+.pf-section-label {
+  font-size: 11px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .8px; color: #9b30d9;
+  display: flex; align-items: center; gap: 6px;
+  padding-bottom: 6px; border-bottom: 1.5px solid #f0eaf8;
+}
+
+.pf-group { display: flex; flex-direction: column; gap: 5px; }
+.pf-group label { font-size: 12px; font-weight: 700; color: #7a6090; }
+.pf-group input {
+  padding: 10px 12px; border: 1.5px solid #e8dff4;
+  border-radius: 9px; background: #faf8fe; color: #2a1040;
+  font-size: 14px; font-family: 'Jost', sans-serif;
+  transition: border .2s, box-shadow .2s;
+}
+.pf-group input:focus { outline: none; border-color: #9b30d9; box-shadow: 0 0 0 3px rgba(155,48,217,.1); }
+
+.pf-warn { font-size: 12px; color: #f59e0b; margin: -6px 0; display: flex; align-items: center; gap: 5px; }
+
+.btn-panel-save {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: linear-gradient(135deg, #4a0080, #9b30d9);
+  color: #fff; border: none; border-radius: 10px;
+  padding: 12px 20px; font-size: 14px; font-weight: 700;
+  cursor: pointer; font-family: 'Jost', sans-serif;
+  box-shadow: 0 4px 14px rgba(74,0,128,.25);
+  transition: transform .15s, box-shadow .15s; margin-top: 6px;
+}
+.btn-panel-save:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(74,0,128,.3); }
+.btn-panel-save:disabled { opacity: .6; cursor: not-allowed; }
+
+/* Footer */
+.panel-footer {
+  padding: 14px 16px;
+  border-top: 1px solid #f0eaf8;
+}
+.btn-panel-logout {
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: #fff1f2; border: 1.5px solid #fecdd3; color: #ef4444;
+  border-radius: 10px; padding: 11px 20px;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  font-family: 'Jost', sans-serif; transition: background .15s;
+}
+.btn-panel-logout:hover { background: #fee2e2; }
+
+/* ── Input de contraseña con botón mostrar/ocultar ───────────── */
+.pf-input-wrap { position: relative; display: flex; align-items: center; }
+.pf-input-wrap input { flex: 1; padding-right: 40px !important; }
+.toggle-pass {
+  position: absolute; right: 10px;
+  background: none; border: none; cursor: pointer;
+  color: #9b30d9; font-size: 14px; padding: 4px;
+  display: flex; align-items: center;
+}
+.toggle-pass:hover { color: #4a0080; }
+
+/* Validación ok */
+.pf-ok  { font-size: 12px; color: #10b981; margin: -6px 0; display: flex; align-items: center; gap: 5px; }
+.pf-warn { font-size: 12px; color: #f59e0b; margin: -6px 0; display: flex; align-items: center; gap: 5px; }
+
+/* Hint de foto */
+.foto-hint {
+  font-size: 11px; color: rgba(255,255,255,.55);
+  margin: -12px 0 14px; display: flex; align-items: center; gap: 5px;
+}
+
+/* Avatar botón cámara loading */
+.avatar-edit-btn.loading { background: #e8dff4; pointer-events: none; }
+/* ── RESPONSIVE MOBILE ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 14px;
+    height: 56px;
+  }
+
+  /* Brand más compacto */
+  .brand { font-size: 16px; gap: 6px; }
+  .brand-icon { font-size: 15px; }
+
+  /* Nav links: solo íconos en móvil */
+  .navbar-left { gap: 8px; }
+  .nav-btn {
+    width: 40px;
+    padding: 8px 0;
+    border-radius: 12px;
+  }
+  .nav-btn-label { display: none !important; }
+  .nav-btn-icon {
+    max-width: 20px !important;
+    opacity: 1 !important;
+  }
+
+  /* Botón de cuenta: solo avatar + chevron */
+  .cuenta-btn {
+    padding: 4px 8px 4px 4px;
+    gap: 6px;
+  }
+  .cuenta-info { display: none; }
+  .cuenta-chevron { font-size: 10px; }
+}
+
+@media (max-width: 420px) {
+  .navbar { padding: 0 10px; }
+  .brand-text { display: none; }
+  .nav-links { gap: 2px; }
+  .nav-btn { width: 36px; }
+}
+/* ── Campanita de notificaciones ─────────────────────────────── */
+.notif-btn {
+  position: relative;
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  border: 1px solid rgba(155,48,217,.2);
+  background: transparent;
+  color: #7a6090;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+  flex-shrink: 0;
+}
+.notif-btn:hover {
+  background: #f5edff;
+  color: #9b30d9;
+  border-color: #9b30d9;
+}
+.notif-btn.has-notif {
+  color: #9b30d9;
+  border-color: rgba(155,48,217,.35);
+  background: #f5edff;
+  animation: notif-pulse 2s ease-in-out infinite;
+}
+@keyframes notif-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(155,48,217,.3); }
+  50%       { box-shadow: 0 0 0 6px rgba(155,48,217,.0); }
+}
+.notif-badge {
+  position: absolute;
+  top: -5px; right: -5px;
+  min-width: 18px; height: 18px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 10px; font-weight: 800;
+  border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 4px;
+  border: 2px solid #fff;
+  font-family: 'Jost', sans-serif;
+  animation: badge-pop .2s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes badge-pop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+/* Aviso de cuenta Google en el panel de contraseña */
+.pf-google-aviso {
+  background: linear-gradient(135deg, #faf5ff, #f0e7ff);
+  border: 1px solid rgba(155, 48, 217, .15);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.pf-google-aviso > i {
+  font-size: 20px;
+  color: #4285f4;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.pf-google-aviso strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #2a1040;
+  margin-bottom: 4px;
+}
+.pf-google-aviso p {
+  font-size: 12px;
+  color: #7a6090;
+  margin: 0;
+  line-height: 1.5;
+}

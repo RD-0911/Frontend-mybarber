@@ -1,0 +1,51 @@
+/* ══════════════════════════════════════════════════════════════
+   FooterPublico — compartido por CitaPublica y Catalogo
+   ══════════════════════════════════════════════════════════════ */
+.fp-footer {
+  background: #fff;
+  border-top: 1px solid #ede0f8;
+  padding: 16px 24px;
+  text-align: center;
+  font-family: 'Jost', sans-serif;
+  margin-top: auto;
+}
+
+.fp-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 12px;
+  color: #bbb;
+}
+
+.fp-icon {
+  font-size: 11px;
+  transform: rotate(-45deg);
+  color: #c0a0e0;
+  margin-right: 2px;
+}
+
+.fp-brand strong { color: #9b30d9; }
+
+.fp-sep { color: #ddd; }
+
+.fp-negocio { color: #aaa; font-weight: 600; }
+
+.fp-tel {
+  color: #9b30d9;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  transition: color .2s;
+}
+.fp-tel:hover { color: #4a0080; }
+.fp-tel i { font-size: 10px; }
+
+@media (max-width: 480px) {
+  .fp-footer { padding: 14px 16px; }
+  .fp-inner { font-size: 11px; gap: 6px; }
+}
